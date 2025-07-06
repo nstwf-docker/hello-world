@@ -14,11 +14,11 @@ jobs:
     env:
       DOCKER_IMAGE_PATH: nstwf/hello-world
       GHCR_IMAGE_PATH: ghcr.io/nstwf-docker/hello-world
-      IMAGE_VERSION_PREFIX: 'hw-'
+      IMAGE_VERSION_PREFIX: 'hw1-'
 
     strategy:
       matrix:
-        version: ['1.9']
+        version: ['1.3']
 
     steps:
       - name: Checkout code
