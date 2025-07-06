@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCKER_IMAGE_PATH: nstwf/hello-world
-      GHCR_IMAGE_PATH: ghcr.io/nstwfdev/hello-world
+      GHCR_IMAGE_PATH: ghcr.io/nstwf-docker/hello-world
       IMAGE_VERSION_PREFIX: 'hw-'
 
     strategy:
