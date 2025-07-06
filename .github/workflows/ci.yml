@@ -12,8 +12,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      DOCKER_IMAGE_PATH: nstwf/hello-world
-      GHCR_IMAGE_PATH: ghcr.io/nstwf-docker/hello-world
+      DOCKER_IMAGE_PATH: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
+      GHCR_IMAGE_PATH: ghcr.io/${{ github.repository }}
       IMAGE_VERSION_PREFIX: 'hw3-'
 
     strategy:
