@@ -81,7 +81,7 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            🚀 Docker imageы for this PR:
+            🚀 Docker images for this PR:
             ```bash
             ${{ steps.meta_pr.outputs.tags || steps.meta.outputs.tags }}
             ```
