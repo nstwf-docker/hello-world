@@ -65,7 +65,8 @@ jobs:
           password: ${{ secrets.GHCR_TOKEN }}
 
       - name: Show meta_pr tags
-        run: echo "meta_pr tags: ${{ steps.meta_pr.outputs.tags }}, meta_tags: ${{ steps.meta.outputs.tags }} "
+        run: |
+          echo "meta_pr tags: ${{ steps.meta_pr.outputs.tags }}, meta_tags: ${{ steps.meta.outputs.tags }} "
 
       - name: Build and push
         uses: docker/build-push-action@v6
