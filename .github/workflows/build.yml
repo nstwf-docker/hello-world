@@ -41,6 +41,7 @@ jobs:
             ${{ env.DOCKER_IMAGE_PATH }}
           tags: |
             type=raw,value=${{ env.IMAGE_VERSION_PREFIX }}pr${{ github.event.pull_request.number }}_${{ github.head_ref }}
+            type=raw,value=${{ env.IMAGE_VERSION_PREFIX }}pr${{ github.event.pull_request.number }}_${{ github.sha }}
 
       - name: Extract image metadata for main
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
