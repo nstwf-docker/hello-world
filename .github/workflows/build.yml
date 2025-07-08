@@ -36,7 +36,6 @@ jobs:
         with:
           images: |
             ${{ env.DOCKER_IMAGE_PATH }}
-            ${{ env.GHCR_IMAGE_PATH }}
           tags: |
             type=raw,value=${{ env.IMAGE_VERSION_PREFIX }}pr${{ github.event.pull_request.number }}_${{ github.head_ref }}_${{ github.event.pull_request.head.sha }}
 
@@ -47,6 +46,7 @@ jobs:
         with:
           images: |
             ${{ env.DOCKER_IMAGE_PATH }}
+            ${{ env.GHCR_IMAGE_PATH }}
           tags: |
             type=raw,value=${{ env.IMAGE_VERSION_PREFIX }}${{ matrix.version }}
 
