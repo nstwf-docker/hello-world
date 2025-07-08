@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        version: ['1.7']
+        version: ['1.8']
 
     steps:
       - name: Checkout code
@@ -71,4 +71,4 @@ jobs:
           build-args: |
             VERSION=${{ matrix.version }}
           tags: |
-            ${{ steps.meta_pr.outputs.tags }}${{ steps.meta.outputs.tags }}
+            ${{ steps.meta_pr.outputs.tags || steps.meta.outputs.tags }}
