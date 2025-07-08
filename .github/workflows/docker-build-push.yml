@@ -24,7 +24,9 @@ jobs:
       image_version: ${{ matrix.version }}
       dockerhub_image: nstwf/${{ github.event.repository.name }}
       docker_extra_build_args: |
-    secrets: inherit
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 
   build-push-pr:
     if: github.event_name == 'pull_request'
@@ -42,4 +44,7 @@ jobs:
       ghcr_image: ghcr.io/${{ github.repository }}
       docker_extra_build_args: |
         HW_VERSION= ${{ matrix.version }}
-    secrets: inherit
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      GHCR_PASSWORD: ${{ secrets.GHCR_PASSWORD }}
