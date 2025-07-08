@@ -4,15 +4,15 @@ on:
   workflow_dispatch:
   push:
     branches:
-     - main
-  pull_request:
-    branches:
       - main
+  pull_request:
+    types:
+      - opened
+      - reopened
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     env:
       DOCKER_IMAGE_PATH: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
       GHCR_IMAGE_PATH: ghcr.io/${{ github.repository }}
@@ -20,7 +20,8 @@ jobs:
 
     strategy:
       matrix:
-        version: ['1.9']
+        version:
+          - '1.9'
 
     steps:
       - name: Checkout code
