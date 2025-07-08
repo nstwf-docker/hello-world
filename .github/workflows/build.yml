@@ -67,10 +67,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
 
-      - name: Show meta_pr tags
-        run: |
-          echo "meta_pr tags: ${{ steps.meta_pr.outputs.tags }}, meta_tags: ${{ steps.meta.outputs.tags }} "
-
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -81,10 +77,11 @@ jobs:
             ${{ steps.meta_pr.outputs.tags || steps.meta.outputs.tags }}
 
       - name: Add comment with image tag
-        if: github.event_name == 'pull_request'
         uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            🚀 Docker images for this PR:
-            ${{ join(fromJson(format('["{0}"]', steps.meta_pr.outputs.tags.replace(',', '","'))), '\n', 'docker pull {0}') }}
+            🚀 Docker imageы for this PR:
+            ```bash
+            ${{ steps.meta_pr.outputs.tags || steps.meta.outputs.tags }}
+            ```
