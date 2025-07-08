@@ -16,6 +16,7 @@ jobs:
       DOCKER_IMAGE_PATH: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
       GHCR_IMAGE_PATH: ghcr.io/${{ github.repository }}
       IMAGE_VERSION_PREFIX: 'prefix-'
+      M_VERSION: ${{ matrix.version }}
 
     strategy:
       matrix:
