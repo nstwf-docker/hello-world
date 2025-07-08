@@ -5,10 +5,14 @@ on:
   push:
     branches:
      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     env:
       DOCKER_IMAGE_PATH: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
       GHCR_IMAGE_PATH: ghcr.io/${{ github.repository }}
