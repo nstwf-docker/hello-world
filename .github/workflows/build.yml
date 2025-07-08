@@ -21,7 +21,6 @@ jobs:
     with:
       version: ${{ matrix.version }}
       docker_image_path: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
-      ghcr_image_path: ghcr.io/${{ github.repository }}
       image_version_prefix: 'example_prefix-'
     secrets:
       docker_username: ${{ secrets.DOCKER_USERNAME }}
