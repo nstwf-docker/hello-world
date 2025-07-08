@@ -17,7 +17,7 @@ jobs:
           - '1.8'
           - '2.3'
 
-    uses: https://nstwfdev/docker-ci/.github/workflows/build.yml@vmain
+    uses: nstwfdev/docker-ci/.github/workflows/build.yml@vmain
     with:
       version: ${{ matrix.version }}
       docker_image_path: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
