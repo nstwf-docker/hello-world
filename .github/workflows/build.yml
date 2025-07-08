@@ -3,9 +3,11 @@ name: Build images and push it to registries
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
@@ -17,7 +19,8 @@ jobs:
 
     strategy:
       matrix:
-        version: ['1.8']
+        version:
+          - '1.9'
 
     steps:
       - name: Checkout code
@@ -36,9 +39,8 @@ jobs:
         with:
           images: |
             ${{ env.DOCKER_IMAGE_PATH }}
-            ${{ env.GHCR_IMAGE_PATH }}
           tags: |
-            type=raw,value=${{ env.IMAGE_VERSION_PREFIX }}pr${{ github.event.pull_request.number }}_${{ github.head_ref }}_${{ github.event.pull_request.head.sha }}
+            type=raw,value=${{ env.IMAGE_VERSION_PREFIX }}pr${{ github.event.pull_request.number }}_${{ github.head_ref }}
 
       - name: Extract image metadata for main
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -47,6 +49,7 @@ jobs:
         with:
           images: |
             ${{ env.DOCKER_IMAGE_PATH }}
+            ${{ env.GHCR_IMAGE_PATH }}
           tags: |
             type=raw,value=${{ env.IMAGE_VERSION_PREFIX }}${{ matrix.version }}
 
@@ -67,8 +70,18 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
           build-args: |
             VERSION=${{ matrix.version }}
           tags: |
             ${{ steps.meta_pr.outputs.tags || steps.meta.outputs.tags }}
+
+      - name: Add comment with image tag
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            🚀 Docker images for this PR:
+            ```bash
+            ${{ steps.meta_pr.outputs.tags || steps.meta.outputs.tags }}
+            ```
