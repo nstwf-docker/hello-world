@@ -20,7 +20,7 @@ jobs:
     uses: nstwfdev/docker-ci/.github/workflows/build.yaml@main
     with:
       version: ${{ matrix.version }}
-      docker_image_path: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
+      docker_image_path: nstwf/${{ github.event.repository.name }}
       image_version_prefix: 'example_prefix-'
     secrets:
       docker_username: ${{ secrets.DOCKER_USERNAME }}
