@@ -36,7 +36,7 @@ jobs:
           - '1.8'
           - '2.4'
 
-    uses: nstwfdev/docker-ci/.github/workflows/docker-build-push-pr-pr.yaml@main
+    uses: nstwfdev/docker-ci/.github/workflows/docker-build-push-pr.yaml@main
     with:
       image_version: ${{ matrix.version }}
       dockerhub_image: nstwf/${{ github.event.repository.name }}
