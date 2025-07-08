@@ -1,4 +1,4 @@
 FROM alpine:latest
 
-ARG VERSION
-CMD ["echo", "Hello, world!", "${VERSION}", "!"]
+ARG HW_VERSION
+CMD ["echo", "Hello, world!", "${HW_VERSION}", "!"]
