@@ -34,7 +34,7 @@ jobs:
 
       - name: Extract image metadata for pull requests
         if: github.event_name == 'pull_request'
-        id: meta_pr
+        id: meta
         uses: docker/metadata-action@v5
         with:
           images: |
@@ -67,10 +67,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
 
-      - name: Show meta_pr tags
-        run: |
-          echo "meta_pr tags: ${{ steps.meta_pr.outputs.tags }}, meta_tags: ${{ steps.meta.outputs.tags }} "
-
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -78,15 +74,14 @@ jobs:
           build-args: |
             VERSION=${{ matrix.version }}
           tags: |
-            ${{ steps.meta_pr.outputs.tags || steps.meta.outputs.tags }}
+            ${{ steps.meta.outputs.tags || steps.meta.outputs.tags }}
 
       - name: Add comment with image tag
-        if: github.event_name == 'pull_request'
         uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             🚀 Docker image for this PR:
             ```bash
-            docker pull ${{ steps.meta_pr.outputs.tags }}
+            docker pull ${{ steps.meta.outputs.tags }}
             ```
