@@ -25,6 +25,7 @@ jobs:
       image_version: ${{ matrix.version }}
       dockerhub_image: nstwf/${{ github.event.repository.name }}
       docker_extra_build_args: |
+        HW_VERSION= ${{ matrix.version }}
       ghcr_image: ghcr.io/${{ github.repository }}
 
   build-push-pr:
