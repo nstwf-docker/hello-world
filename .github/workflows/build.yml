@@ -71,4 +71,4 @@ jobs:
           build-args: |
             VERSION=${{ matrix.version }}
           tags: |
-            ${{ steps.meta_pr.outputs.tags }}${{ steps.meta.outputs.tags }}
+            ${{ steps.meta_pr.outputs.tags || steps.meta.outputs.tags }}
