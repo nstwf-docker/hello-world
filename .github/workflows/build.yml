@@ -86,7 +86,5 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            🚀 Docker image for this PR:
-            ```bash
-            docker pull ${{ steps.meta_pr.outputs.tags }}
-            ```
+            🚀 Docker images for this PR:
+            ${{ join(fromJson(format('["{0}"]', steps.meta_pr.outputs.tags.replace(',', '","'))), '\n', 'docker pull {0}') }}
