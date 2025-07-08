@@ -3,9 +3,11 @@ name: Build images and push it to registries
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches:
+     - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
