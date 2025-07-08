@@ -24,9 +24,7 @@ jobs:
       image_version: ${{ matrix.version }}
       dockerhub_image: nstwf/${{ github.event.repository.name }}
       docker_extra_build_args: |
-    secrets:
-      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
-      dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    secrets: inherit
 
   build-push-pr:
     if: github.event_name == 'pull_request'
@@ -37,14 +35,11 @@ jobs:
           - '1.8'
           - '2.4'
 
-    uses: nstwfdev/docker-ci/.github/workflows/docker-build-push-pr.yaml@main
+    uses: nstwfdev/docker-ci/.github/workflows/docker-build-push.yaml@main
     with:
       image_version: ${{ matrix.version }}
       dockerhub_image: nstwf/${{ github.event.repository.name }}
+      ghcr_image: ghcr.io/${{ github.repository }}
       docker_extra_build_args: |
         HW_VERSION= ${{ matrix.version }}
-    secrets:
-      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
-      dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      ghcr_username: ${{ github.actor }}
-      ghcr_password: ${{ secrets.GHCR_PASSWORD }}
+    secrets: inherit
