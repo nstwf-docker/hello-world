@@ -19,12 +19,13 @@ jobs:
           - '1.8'
           - '2.6'
 
-    uses: nstwf-docker/docker-ci/.github/workflows/docker-build-push-pr.yaml@main
+    uses: nstwf-docker/docker-ci/.github/workflows/docker-build-push.yaml@main
     secrets: inherit
     with:
       image_version: ${{ matrix.version }}
       dockerhub_image: nstwf/${{ github.event.repository.name }}
       docker_extra_build_args: |
+      ghcr_image: ghcr.io/${{ github.repository }}
 
   build-push-pr:
     if: github.event_name == 'pull_request'
@@ -35,11 +36,10 @@ jobs:
           - '1.8'
           - '2.6'
 
-    uses: nstwf-docker/docker-ci/.github/workflows/docker-build-push.yaml@main
+    uses: nstwf-docker/docker-ci/.github/workflows/docker-build-push-pr.yaml@main
     secrets: inherit
     with:
       image_version: ${{ matrix.version }}
       dockerhub_image: nstwf/${{ github.event.repository.name }}
-      ghcr_image: ghcr.io/${{ github.repository }}
       docker_extra_build_args: |
         HW_VERSION= ${{ matrix.version }}
