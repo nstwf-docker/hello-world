@@ -17,7 +17,7 @@ jobs:
       matrix:
         version:
           - '1.8'
-          - '2.7'
+          - '2.8'
 
     uses: nstwf-docker/docker-ci/.github/workflows/docker-build-push.yaml@main
     secrets: inherit
@@ -34,7 +34,7 @@ jobs:
       matrix:
         version:
           - '1.8'
-          - '2.7'
+          - '2.8'
 
     uses: nstwf-docker/docker-ci/.github/workflows/docker-build-push-pr.yaml@main
     secrets: inherit
