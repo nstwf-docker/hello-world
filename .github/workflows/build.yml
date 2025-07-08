@@ -77,6 +77,7 @@ jobs:
             ${{ steps.meta_pr.outputs.tags || steps.meta.outputs.tags }}
 
       - name: Add comment with image tag
+        if: github.event_name == 'pull_request'
         uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.pull_request.number }}
