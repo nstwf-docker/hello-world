@@ -37,9 +37,8 @@ jobs:
             ${{ env.DOCKER_IMAGE_PATH }}
             ${{ env.GHCR_IMAGE_PATH }}
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
             type=sha
+            type=raw,value=${{ env.IMAGE_VERSION_PREFIX }}${{ matrix.version }}
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
